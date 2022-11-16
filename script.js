@@ -4,11 +4,9 @@ let dataKompetisi = document.getElementById("dataComp");
 fetch("http://127.0.0.1:5500/standing.json")
     .then(Response => Response.json())
     .then(data => {
-        console.log(data)
+        console.log(data.standings[0].table)
 
-        console.log(data.kompetisi)
-
-        data.kompetisiforEach(dataKompetisi)
+        data.standings[0].table.forEach(tampil)
     })
 
     .catch(error => {
@@ -16,5 +14,10 @@ fetch("http://127.0.0.1:5500/standing.json")
     });
 
 function tampil(value, index) {
-    dataKompetisi.innerHTML += `<tr><td>${value.name}</td><td>${value.plan}</td><td>${value.type}</td></tr>`
+    dataKompetisi.innerHTML += `<tr>
+    <td>${value.position}</td>
+    <td>${value.team.name}</td>
+    <td>${value.playedGames}</td>
+    <td>${value.points}</td>
+    </tr>`
 }
